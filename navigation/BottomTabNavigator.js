@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as React from 'react';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -15,13 +16,22 @@ export default function BottomTabNavigator({ navigation, route }) {
   navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}
+      tabBarOptions={{ style: styles.bottomTabContainer, activeTintColor: "#FFF", inactiveTintColor: "#CCC" }}>
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
         options={{
           title: 'Tra cứu',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Search"
+        component={HomeScreen}
+        options={{
+          title: 'Tìm kiếm',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-search" />,
         }}
       />
       <BottomTab.Screen
@@ -42,7 +52,16 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return 'Tra cứu hợp âm';
+    case 'Search':
+      return 'Tìm kiếm hợp âm';
     case 'Transpose':
       return 'Transpose - Dịch giọng';
   }
 }
+
+
+const styles = StyleSheet.create({
+  bottomTabContainer: {
+    backgroundColor: '#F05A67',
+  },
+});
