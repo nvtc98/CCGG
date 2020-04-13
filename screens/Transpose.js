@@ -1,5 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
 import {
   StyleSheet, Text, View, TextInput, Button,
@@ -7,7 +5,7 @@ import {
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 export default function Transpose() {
-  const [state, setState] = React.useState({ content: 'Am Em7 Dm G C', tranposeTo: 0 });
+  const [state, setState] = useState({ content: 'Am Em7 Dm G C', tranposeTo: 0 });
 
   function transposeChord(chord, amount) {
     const scale = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];

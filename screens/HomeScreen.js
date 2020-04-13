@@ -1,19 +1,18 @@
-import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-
-import { MonoText } from '../components/StyledText';
+import React, { useState } from 'react';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
+  const _onChangeText = (text) => {
+
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
         <View style={styles.getStartedContainer}>
-
-          <Text style={styles.getStartedText}><Text>Cumming soon</Text></Text>
-          
+          <CustomTextInput onChangeText={_onChangeText}></CustomTextInput>
+          <Suggestion></Suggestion>
         </View>
       </ScrollView>
     </View>
@@ -24,37 +23,24 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use useful development
-        tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
+const CustomTextInput = ({ onChangeText }) => {
+  const [content, setContent] = useState('');
+  const _onChangeText = (text) => {
+    onChangeText(text);
+    setContent(text);
   }
+  return <TextInput
+    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+    onChangeText={_onChangeText}
+    value={content}
+  />
 }
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-  );
+const Suggestion = ({ }) => {
+  const [data, setData] = useState([]);
+  const _renderItem = ({ item }) => <TouchableOpacity><Text>{item}</Text></TouchableOpacity>
+  return <View>
+    <Text>Gợi ý</Text><FlatList data={data} renderItem={_renderItem}></FlatList></View>
 }
 
 const styles = StyleSheet.create({
