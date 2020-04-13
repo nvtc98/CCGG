@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
-  const _onChangeText = (text) => {
-
-  }
+  const _onChangeText = text => { };
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.getStartedContainer}>
-          <CustomTextInput onChangeText={_onChangeText}></CustomTextInput>
-          <Suggestion></Suggestion>
+          <CustomTextInput onChangeText={_onChangeText} />
+          <Suggestion />
         </View>
       </ScrollView>
     </View>
@@ -25,23 +32,33 @@ HomeScreen.navigationOptions = {
 
 const CustomTextInput = ({ onChangeText }) => {
   const [content, setContent] = useState('');
-  const _onChangeText = (text) => {
+  const _onChangeText = text => {
     onChangeText(text);
     setContent(text);
-  }
-  return <TextInput
-    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-    onChangeText={_onChangeText}
-    value={content}
-  />
-}
+  };
+  return (
+    <TextInput
+      style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+      onChangeText={_onChangeText}
+      value={content}
+    />
+  );
+};
 
 const Suggestion = ({ }) => {
   const [data, setData] = useState([]);
-  const _renderItem = ({ item }) => <TouchableOpacity><Text>{item}</Text></TouchableOpacity>
-  return <View>
-    <Text>Gợi ý</Text><FlatList data={data} renderItem={_renderItem}></FlatList></View>
-}
+  const _renderItem = ({ item }) => (
+    <TouchableOpacity>
+      <Text>{item}</Text>
+    </TouchableOpacity>
+  );
+  return (
+    <View>
+      <Text>Gợi ý</Text>
+      <FlatList data={data} renderItem={_renderItem} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
